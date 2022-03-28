@@ -1,0 +1,17 @@
+{
+  "name": "utilisateur/exercices-poo",
+  "type": "project",
+  "license": "CC",
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Axel Gromat",
+      "email": "axel.gromat@gmail.com"
+    }
+  ],
+  "require": {}
+}
