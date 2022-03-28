@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App;
+namespace App\Models;
 
 // On créer une class abstraite avec le préfixe abstract
 

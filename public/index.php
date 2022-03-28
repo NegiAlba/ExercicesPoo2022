@@ -1,7 +1,9 @@
 <?php
 
-use App\Oiseau;
-use App\Poisson;
+use App\Models\Poisson;
+
+$root = dirname(__DIR__).DIRECTORY_SEPARATOR;
+define('VIEWS_PATH', $root.'views'.DIRECTORY_SEPARATOR);
 
     spl_autoload_register(function ($class) {
         // ! Nom de la classe
@@ -22,18 +24,14 @@ use App\Poisson;
     });
 
         $router = new App\Router();
-        $router->register('/', function () { include '../views/homepage.php'; })
-                ->register('/oiseau', function () {
-                    $eagle = new Oiseau('Eagle', 'notUSA');
-                    $albatros = new Oiseau('Albatros', 'CAW');
-                    $pigeon = new Oiseau('Pigeon', 'Stupid');
-                    include '../views/oiseau.php';
-                })
-                ->register('/poisson', function () {
+        // $router->register('/', function () { include '../views/homepage.php'; })
+        $router->get('/', [App\Controllers\ExerciceController::class, 'index'])
+                ->get('/oiseau', [App\Controllers\ExerciceController::class, 'oiseau'])
+                ->post('/oiseau', [App\Controllers\ExerciceController::class, 'processed'])
+                ->get('/poisson', function () {
                     $guppito = new Poisson('Guppy', 'Guppito');
                     $redFish = new Poisson('Poisson Rouge', 'LPPSR');
                     $shark = new Poisson('Requin', 'NomNom');
                     include '../views/poisson.php';
                 });
-
-        echo $router->resolve($_SERVER['REQUEST_URI']);
+        echo $router->resolve($_SERVER['REQUEST_URI'], strtolower($_SERVER['REQUEST_METHOD']));
